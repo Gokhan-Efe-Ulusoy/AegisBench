@@ -4,6 +4,7 @@ from __future__ import annotations
 
 import inspect
 import json
+import sys
 from pathlib import Path
 
 import pytest
@@ -109,6 +110,8 @@ def test_freeze_covers_everything_and_is_deterministic():
     assert first == second
     assert first["missing"] == []
     assert len(first["files"]) >= 160
-    assert first["python"].startswith("3.12")
+    # Contract: the manifest records the interpreter that generated it,
+    # using the same normalization as freeze.build_freeze.
+    assert first["python"] == sys.version.split()[0]
     assert "docs/reproducibility_manifest.md" not in first["files"]  # excluded: embeds hashes
     assert "src/aegisbench/analyzers/graph.py" in first["files"]
