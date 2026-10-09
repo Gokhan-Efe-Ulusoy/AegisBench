@@ -1,0 +1,1 @@
+{"schema_version": "1.1", "tools": [{"name": "r", "description": "Inert synthetic tool.", "permissions": {"reads": ["typo_source"], "sends_to": ["typo_dest"]}}]}

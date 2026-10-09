@@ -1,0 +1,36 @@
+{
+  "agent_name": "heldout-agent",
+  "data_sources": [
+    {
+      "id": "heldout_public_faq",
+      "sensitivity": "non-sensitive"
+    }
+  ],
+  "destinations": [
+    {
+      "id": "heldout_local_archive",
+      "trust": "internal"
+    }
+  ],
+  "schema_version": "1.1",
+  "tools": [
+    {
+      "description": "Inert heldout tool.",
+      "name": "reader",
+      "permissions": {
+        "reads": [
+          "heldout_public_faq"
+        ]
+      }
+    },
+    {
+      "description": "Inert heldout tool.",
+      "name": "logger",
+      "permissions": {
+        "sends_to": [
+          "heldout_local_archive"
+        ]
+      }
+    }
+  ]
+}

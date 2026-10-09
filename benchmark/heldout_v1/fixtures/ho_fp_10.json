@@ -1,0 +1,30 @@
+{
+  "agent_name": "heldout-agent",
+  "data_sources": [
+    {
+      "id": "heldout_patient_records",
+      "sensitivity": "sensitive"
+    }
+  ],
+  "destinations": [
+    {
+      "id": "heldout_partner_api",
+      "trust": "external"
+    }
+  ],
+  "schema_version": "1.1",
+  "tools": [
+    {
+      "description": "Inert heldout tool.",
+      "name": "reader",
+      "permissions": {
+        "reads": [
+          "heldout_typo_src"
+        ],
+        "sends_to": [
+          "heldout_partner_api"
+        ]
+      }
+    }
+  ]
+}

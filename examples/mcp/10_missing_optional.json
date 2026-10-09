@@ -1,0 +1,7 @@
+{
+  "mcpServers": {
+    "quick": {
+      "command": "synthetic-quick-server"
+    }
+  }
+}

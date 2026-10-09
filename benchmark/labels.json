@@ -1,0 +1,464 @@
+{
+  "count_labeled": 64,
+  "dataset_version": "1.0",
+  "fixtures": {
+    "benign_resemblance_01.json": {
+      "expected_chain": "safe",
+      "expected_wildcard": false,
+      "family": "benign_resemblance",
+      "property": "Graph and baseline must stay negative on lookalikes.",
+      "rationale": "Glob 'ls *' is not the exact '*' token; read has no send path."
+    },
+    "benign_resemblance_02.json": {
+      "expected_chain": "safe",
+      "expected_wildcard": false,
+      "family": "benign_resemblance",
+      "property": "Graph and baseline must stay negative on lookalikes.",
+      "rationale": "Namespaced 'sudo:*' is out of scope; send is internal only."
+    },
+    "benign_resemblance_03.json": {
+      "expected_chain": "safe",
+      "expected_wildcard": false,
+      "family": "benign_resemblance",
+      "property": "Graph and baseline must stay negative on lookalikes.",
+      "rationale": "Similar ID is not an exact match; undefined reference creates no edge (typos must not match)."
+    },
+    "benign_resemblance_04.json": {
+      "expected_chain": "safe",
+      "expected_wildcard": false,
+      "family": "benign_resemblance",
+      "property": "Graph and baseline must stay negative on lookalikes.",
+      "rationale": "External send of non-sensitive data only."
+    },
+    "benign_resemblance_05.json": {
+      "expected_chain": "safe",
+      "expected_wildcard": false,
+      "family": "benign_resemblance",
+      "property": "Graph and baseline must stay negative on lookalikes.",
+      "rationale": "Description-only risk ('sends HR data to external API' in text) with no capability fields; descriptions are never parsed."
+    },
+    "benign_resemblance_06.json": {
+      "expected_chain": "safe",
+      "expected_wildcard": false,
+      "family": "benign_resemblance",
+      "property": "Graph and baseline must stay negative on lookalikes.",
+      "rationale": "Legacy file_access/network_access never create graph edges."
+    },
+    "benign_resemblance_07.json": {
+      "expected_chain": "safe",
+      "expected_wildcard": false,
+      "family": "benign_resemblance",
+      "property": "Graph and baseline must stay negative on lookalikes.",
+      "rationale": "Tool name 'sender' implies nothing without sends_to."
+    },
+    "benign_resemblance_08.json": {
+      "expected_chain": "safe",
+      "expected_wildcard": false,
+      "family": "benign_resemblance",
+      "property": "Graph and baseline must stay negative on lookalikes.",
+      "rationale": "Self-loop with internal send only; cycles must not FP."
+    },
+    "broken_chain_01.json": {
+      "expected_chain": "safe",
+      "expected_wildcard": false,
+      "family": "broken_chain",
+      "property": "Graph must stay negative despite surface resemblance.",
+      "rationale": "Reader and sender exist but no invokes edge connects them. No complete sensitive->external directed path exists."
+    },
+    "broken_chain_02.json": {
+      "expected_chain": "safe",
+      "expected_wildcard": false,
+      "family": "broken_chain",
+      "property": "Graph must stay negative despite surface resemblance.",
+      "rationale": "Chain reads a non-sensitive source only. No complete sensitive->external directed path exists."
+    },
+    "broken_chain_03.json": {
+      "expected_chain": "safe",
+      "expected_wildcard": false,
+      "family": "broken_chain",
+      "property": "Graph must stay negative despite surface resemblance.",
+      "rationale": "Chain sends to an internal destination only. No complete sensitive->external directed path exists."
+    },
+    "broken_chain_04.json": {
+      "expected_chain": "safe",
+      "expected_wildcard": false,
+      "family": "broken_chain",
+      "property": "Graph must stay negative despite surface resemblance.",
+      "rationale": "Invokes references an undefined tool. No complete sensitive->external directed path exists."
+    },
+    "broken_chain_05.json": {
+      "expected_chain": "safe",
+      "expected_wildcard": false,
+      "family": "broken_chain",
+      "property": "Graph must stay negative despite surface resemblance.",
+      "rationale": "Invoke direction does not carry sensitive data outward. No complete sensitive->external directed path exists."
+    },
+    "broken_chain_06.json": {
+      "expected_chain": "safe",
+      "expected_wildcard": false,
+      "family": "broken_chain",
+      "property": "Graph must stay negative despite surface resemblance.",
+      "rationale": "Reader and sender exist but no invokes edge connects them. No complete sensitive->external directed path exists."
+    },
+    "broken_chain_07.json": {
+      "expected_chain": "safe",
+      "expected_wildcard": false,
+      "family": "broken_chain",
+      "property": "Graph must stay negative despite surface resemblance.",
+      "rationale": "Chain reads a non-sensitive source only. No complete sensitive->external directed path exists."
+    },
+    "broken_chain_08.json": {
+      "expected_chain": "safe",
+      "expected_wildcard": false,
+      "family": "broken_chain",
+      "property": "Graph must stay negative despite surface resemblance.",
+      "rationale": "Chain sends to an internal destination only. No complete sensitive->external directed path exists."
+    },
+    "broken_chain_09.json": {
+      "expected_chain": "safe",
+      "expected_wildcard": false,
+      "family": "broken_chain",
+      "property": "Graph must stay negative despite surface resemblance.",
+      "rationale": "Invokes references an undefined tool. No complete sensitive->external directed path exists."
+    },
+    "broken_chain_10.json": {
+      "expected_chain": "safe",
+      "expected_wildcard": false,
+      "family": "broken_chain",
+      "property": "Graph must stay negative despite surface resemblance.",
+      "rationale": "Invoke direction does not carry sensitive data outward. No complete sensitive->external directed path exists."
+    },
+    "chain_exfil_01.json": {
+      "expected_chain": "risky",
+      "expected_wildcard": false,
+      "family": "chain_exfil",
+      "property": "Graph should flag multi-hop path; baseline misses most.",
+      "rationale": "Two/three-tool invoke chain connects a sensitive read to an external send; no single tool shows the full path."
+    },
+    "chain_exfil_02.json": {
+      "expected_chain": "risky",
+      "expected_wildcard": false,
+      "family": "chain_exfil",
+      "property": "Graph should flag multi-hop path; baseline misses most.",
+      "rationale": "Two/three-tool invoke chain connects a sensitive read to an external send; no single tool shows the full path."
+    },
+    "chain_exfil_03.json": {
+      "expected_chain": "risky",
+      "expected_wildcard": false,
+      "family": "chain_exfil",
+      "property": "Graph should flag multi-hop path; baseline misses most.",
+      "rationale": "Two/three-tool invoke chain connects a sensitive read to an external send; no single tool shows the full path."
+    },
+    "chain_exfil_04.json": {
+      "expected_chain": "risky",
+      "expected_wildcard": true,
+      "family": "chain_exfil",
+      "property": "Graph should flag multi-hop path; baseline misses most.",
+      "rationale": "Two/three-tool invoke chain connects a sensitive read to an external send; no single tool shows the full path."
+    },
+    "chain_exfil_05.json": {
+      "expected_chain": "risky",
+      "expected_wildcard": false,
+      "family": "chain_exfil",
+      "property": "Graph should flag multi-hop path; baseline misses most.",
+      "rationale": "Two/three-tool invoke chain connects a sensitive read to an external send; no single tool shows the full path."
+    },
+    "chain_exfil_06.json": {
+      "expected_chain": "risky",
+      "expected_wildcard": false,
+      "family": "chain_exfil",
+      "property": "Graph should flag multi-hop path; baseline misses most.",
+      "rationale": "Two/three-tool invoke chain connects a sensitive read to an external send; no single tool shows the full path."
+    },
+    "chain_exfil_07.json": {
+      "expected_chain": "risky",
+      "expected_wildcard": false,
+      "family": "chain_exfil",
+      "property": "Graph should flag multi-hop path; baseline misses most.",
+      "rationale": "Two/three-tool invoke chain connects a sensitive read to an external send; no single tool shows the full path."
+    },
+    "chain_exfil_08.json": {
+      "expected_chain": "risky",
+      "expected_wildcard": true,
+      "family": "chain_exfil",
+      "property": "Graph should flag multi-hop path; baseline misses most.",
+      "rationale": "Two/three-tool invoke chain connects a sensitive read to an external send; no single tool shows the full path."
+    },
+    "chain_exfil_09.json": {
+      "expected_chain": "risky",
+      "expected_wildcard": false,
+      "family": "chain_exfil",
+      "property": "Graph should flag multi-hop path; baseline misses most.",
+      "rationale": "Two/three-tool invoke chain connects a sensitive read to an external send; no single tool shows the full path."
+    },
+    "chain_exfil_10.json": {
+      "expected_chain": "risky",
+      "expected_wildcard": false,
+      "family": "chain_exfil",
+      "property": "Graph should flag multi-hop path; baseline misses most.",
+      "rationale": "Two/three-tool invoke chain connects a sensitive read to an external send; no single tool shows the full path."
+    },
+    "chain_exfil_11.json": {
+      "expected_chain": "risky",
+      "expected_wildcard": false,
+      "family": "chain_exfil",
+      "property": "Graph should flag multi-hop path; baseline misses most.",
+      "rationale": "Two/three-tool invoke chain connects a sensitive read to an external send; no single tool shows the full path."
+    },
+    "chain_exfil_12.json": {
+      "expected_chain": "risky",
+      "expected_wildcard": true,
+      "family": "chain_exfil",
+      "property": "Graph should flag multi-hop path; baseline misses most.",
+      "rationale": "Two/three-tool invoke chain connects a sensitive read to an external send; no single tool shows the full path."
+    },
+    "direct_exfil_01.json": {
+      "expected_chain": "risky",
+      "expected_wildcard": false,
+      "family": "direct_exfil",
+      "property": "Graph should flag source->tool->destination path.",
+      "rationale": "Single tool explicitly reads a sensitive source and sends to an external destination."
+    },
+    "direct_exfil_02.json": {
+      "expected_chain": "risky",
+      "expected_wildcard": false,
+      "family": "direct_exfil",
+      "property": "Graph should flag source->tool->destination path.",
+      "rationale": "Single tool explicitly reads a sensitive source and sends to an external destination."
+    },
+    "direct_exfil_03.json": {
+      "expected_chain": "risky",
+      "expected_wildcard": true,
+      "family": "direct_exfil",
+      "property": "Graph should flag source->tool->destination path.",
+      "rationale": "Single tool explicitly reads a sensitive source and sends to an external destination."
+    },
+    "direct_exfil_04.json": {
+      "expected_chain": "risky",
+      "expected_wildcard": false,
+      "family": "direct_exfil",
+      "property": "Graph should flag source->tool->destination path.",
+      "rationale": "Single tool explicitly reads a sensitive source and sends to an external destination."
+    },
+    "direct_exfil_05.json": {
+      "expected_chain": "risky",
+      "expected_wildcard": false,
+      "family": "direct_exfil",
+      "property": "Graph should flag source->tool->destination path.",
+      "rationale": "Single tool explicitly reads a sensitive source and sends to an external destination."
+    },
+    "direct_exfil_06.json": {
+      "expected_chain": "risky",
+      "expected_wildcard": true,
+      "family": "direct_exfil",
+      "property": "Graph should flag source->tool->destination path.",
+      "rationale": "Single tool explicitly reads a sensitive source and sends to an external destination."
+    },
+    "direct_exfil_07.json": {
+      "expected_chain": "risky",
+      "expected_wildcard": false,
+      "family": "direct_exfil",
+      "property": "Graph should flag source->tool->destination path.",
+      "rationale": "Single tool explicitly reads a sensitive source and sends to an external destination."
+    },
+    "direct_exfil_08.json": {
+      "expected_chain": "risky",
+      "expected_wildcard": false,
+      "family": "direct_exfil",
+      "property": "Graph should flag source->tool->destination path.",
+      "rationale": "Single tool explicitly reads a sensitive source and sends to an external destination."
+    },
+    "direct_exfil_09.json": {
+      "expected_chain": "risky",
+      "expected_wildcard": true,
+      "family": "direct_exfil",
+      "property": "Graph should flag source->tool->destination path.",
+      "rationale": "Single tool explicitly reads a sensitive source and sends to an external destination."
+    },
+    "direct_exfil_10.json": {
+      "expected_chain": "risky",
+      "expected_wildcard": false,
+      "family": "direct_exfil",
+      "property": "Graph should flag source->tool->destination path.",
+      "rationale": "Single tool explicitly reads a sensitive source and sends to an external destination."
+    },
+    "narrow_safe_01.json": {
+      "expected_chain": "safe",
+      "expected_wildcard": false,
+      "family": "narrow_safe",
+      "property": "Both baseline and graph should be negative.",
+      "rationale": "Named commands only; no wildcard and no sensitive->external path."
+    },
+    "narrow_safe_02.json": {
+      "expected_chain": "safe",
+      "expected_wildcard": false,
+      "family": "narrow_safe",
+      "property": "Both baseline and graph should be negative.",
+      "rationale": "Named commands only; no wildcard and no sensitive->external path."
+    },
+    "narrow_safe_03.json": {
+      "expected_chain": "safe",
+      "expected_wildcard": false,
+      "family": "narrow_safe",
+      "property": "Both baseline and graph should be negative.",
+      "rationale": "Named commands only; no wildcard and no sensitive->external path."
+    },
+    "narrow_safe_04.json": {
+      "expected_chain": "safe",
+      "expected_wildcard": false,
+      "family": "narrow_safe",
+      "property": "Both baseline and graph should be negative.",
+      "rationale": "Named commands only; no wildcard and no sensitive->external path."
+    },
+    "narrow_safe_05.json": {
+      "expected_chain": "safe",
+      "expected_wildcard": false,
+      "family": "narrow_safe",
+      "property": "Both baseline and graph should be negative.",
+      "rationale": "Named commands only; no wildcard and no sensitive->external path."
+    },
+    "narrow_safe_06.json": {
+      "expected_chain": "safe",
+      "expected_wildcard": false,
+      "family": "narrow_safe",
+      "property": "Both baseline and graph should be negative.",
+      "rationale": "Named commands only; no wildcard and no sensitive->external path."
+    },
+    "narrow_safe_07.json": {
+      "expected_chain": "safe",
+      "expected_wildcard": false,
+      "family": "narrow_safe",
+      "property": "Both baseline and graph should be negative.",
+      "rationale": "Named commands only; no wildcard and no sensitive->external path."
+    },
+    "narrow_safe_08.json": {
+      "expected_chain": "safe",
+      "expected_wildcard": false,
+      "family": "narrow_safe",
+      "property": "Both baseline and graph should be negative.",
+      "rationale": "Named commands only; no wildcard and no sensitive->external path."
+    },
+    "sensitive_read_only_01.json": {
+      "expected_chain": "safe",
+      "expected_wildcard": false,
+      "family": "sensitive_read_only",
+      "property": "Graph must not flag read-alone as exfiltration.",
+      "rationale": "Sensitive read exists but no tool sends to an external destination and no invoke chain reaches one."
+    },
+    "sensitive_read_only_02.json": {
+      "expected_chain": "safe",
+      "expected_wildcard": false,
+      "family": "sensitive_read_only",
+      "property": "Graph must not flag read-alone as exfiltration.",
+      "rationale": "Sensitive read exists but no tool sends to an external destination and no invoke chain reaches one."
+    },
+    "sensitive_read_only_03.json": {
+      "expected_chain": "safe",
+      "expected_wildcard": false,
+      "family": "sensitive_read_only",
+      "property": "Graph must not flag read-alone as exfiltration.",
+      "rationale": "Sensitive read exists but no tool sends to an external destination and no invoke chain reaches one."
+    },
+    "sensitive_read_only_04.json": {
+      "expected_chain": "safe",
+      "expected_wildcard": false,
+      "family": "sensitive_read_only",
+      "property": "Graph must not flag read-alone as exfiltration.",
+      "rationale": "Sensitive read exists but no tool sends to an external destination and no invoke chain reaches one."
+    },
+    "sensitive_read_only_05.json": {
+      "expected_chain": "safe",
+      "expected_wildcard": false,
+      "family": "sensitive_read_only",
+      "property": "Graph must not flag read-alone as exfiltration.",
+      "rationale": "Sensitive read exists but no tool sends to an external destination and no invoke chain reaches one."
+    },
+    "sensitive_read_only_06.json": {
+      "expected_chain": "safe",
+      "expected_wildcard": false,
+      "family": "sensitive_read_only",
+      "property": "Graph must not flag read-alone as exfiltration.",
+      "rationale": "Sensitive read exists but no tool sends to an external destination and no invoke chain reaches one."
+    },
+    "sensitive_read_only_07.json": {
+      "expected_chain": "safe",
+      "expected_wildcard": false,
+      "family": "sensitive_read_only",
+      "property": "Graph must not flag read-alone as exfiltration.",
+      "rationale": "Sensitive read exists but no tool sends to an external destination and no invoke chain reaches one."
+    },
+    "sensitive_read_only_08.json": {
+      "expected_chain": "safe",
+      "expected_wildcard": false,
+      "family": "sensitive_read_only",
+      "property": "Graph must not flag read-alone as exfiltration.",
+      "rationale": "Sensitive read exists but no tool sends to an external destination and no invoke chain reaches one."
+    },
+    "wildcard_only_01.json": {
+      "expected_chain": "safe",
+      "expected_wildcard": true,
+      "family": "wildcard_only",
+      "property": "Baseline narrow rule should fire; chain task is negative.",
+      "rationale": "Exact '*' allowlist present, but no sensitive source or external destination is modeled, so no chain path exists."
+    },
+    "wildcard_only_02.json": {
+      "expected_chain": "safe",
+      "expected_wildcard": true,
+      "family": "wildcard_only",
+      "property": "Baseline narrow rule should fire; chain task is negative.",
+      "rationale": "Exact '*' allowlist present, but no sensitive source or external destination is modeled, so no chain path exists."
+    },
+    "wildcard_only_03.json": {
+      "expected_chain": "safe",
+      "expected_wildcard": true,
+      "family": "wildcard_only",
+      "property": "Baseline narrow rule should fire; chain task is negative.",
+      "rationale": "Exact '*' allowlist present, but no sensitive source or external destination is modeled, so no chain path exists."
+    },
+    "wildcard_only_04.json": {
+      "expected_chain": "safe",
+      "expected_wildcard": true,
+      "family": "wildcard_only",
+      "property": "Baseline narrow rule should fire; chain task is negative.",
+      "rationale": "Exact '*' allowlist present, but no sensitive source or external destination is modeled, so no chain path exists."
+    },
+    "wildcard_only_05.json": {
+      "expected_chain": "safe",
+      "expected_wildcard": true,
+      "family": "wildcard_only",
+      "property": "Baseline narrow rule should fire; chain task is negative.",
+      "rationale": "Exact '*' allowlist present, but no sensitive source or external destination is modeled, so no chain path exists."
+    },
+    "wildcard_only_06.json": {
+      "expected_chain": "safe",
+      "expected_wildcard": true,
+      "family": "wildcard_only",
+      "property": "Baseline narrow rule should fire; chain task is negative.",
+      "rationale": "Exact '*' allowlist present, but no sensitive source or external destination is modeled, so no chain path exists."
+    },
+    "wildcard_only_07.json": {
+      "expected_chain": "safe",
+      "expected_wildcard": true,
+      "family": "wildcard_only",
+      "property": "Baseline narrow rule should fire; chain task is negative.",
+      "rationale": "Exact '*' allowlist present, but no sensitive source or external destination is modeled, so no chain path exists."
+    },
+    "wildcard_only_08.json": {
+      "expected_chain": "safe",
+      "expected_wildcard": true,
+      "family": "wildcard_only",
+      "property": "Baseline narrow rule should fire; chain task is negative.",
+      "rationale": "Exact '*' allowlist present, but no sensitive source or external destination is modeled, so no chain path exists."
+    }
+  },
+  "robustness_excluded": [
+    "robust_dup_sources_01.json",
+    "robust_dup_tools_01.json",
+    "robust_malformed_01.json",
+    "robust_missing_version_01.json",
+    "robust_top_array_01.json",
+    "robust_undefined_refs_01.json",
+    "robust_unknown_field_01.json",
+    "robust_wrong_type_01.json"
+  ]
+}

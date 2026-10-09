@@ -1,0 +1,22 @@
+{
+  "schema_version": "1.0",
+  "agent_name": "example-safe-agent",
+  "tools": [
+    {
+      "name": "shell",
+      "description": "Run a small set of named read-only commands.",
+      "permissions": {
+        "commands": ["ls", "git status"],
+        "file_access": ["project/docs"],
+        "network_access": []
+      }
+    },
+    {
+      "name": "file-reader",
+      "description": "Read project files.",
+      "permissions": {
+        "file_access": ["project/docs"]
+      }
+    }
+  ]
+}

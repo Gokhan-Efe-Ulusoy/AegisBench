@@ -1,0 +1,28 @@
+{
+  "servers": {
+    "data": {
+      "command": "python",
+      "args": ["-m", "synthetic_data_server"],
+      "env": {
+        "DATA_API_KEY": "${input:data-key}"
+      },
+      "sandboxEnabled": true
+    }
+  },
+  "inputs": [
+    {
+      "type": "promptString",
+      "id": "data-key",
+      "description": "Synthetic API key prompt",
+      "password": true
+    }
+  ],
+  "sandbox": {
+    "filesystem": {
+      "allowWrite": ["/tmp/synthetic-workspace"]
+    },
+    "network": {
+      "allowedDomains": ["example.invalid"]
+    }
+  }
+}

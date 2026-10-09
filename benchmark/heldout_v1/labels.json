@@ -1,0 +1,432 @@
+{
+  "count_labeled": 52,
+  "dataset_version": "heldout_v1",
+  "fixtures": {
+    "ho_amb_01.json": {
+      "expected_chain": "safe",
+      "expected_chain_multi": false,
+      "expected_direct": false,
+      "expected_wildcard": false,
+      "family": "ho_ambiguous_invoke",
+      "rationale": "Reverse-only invoke: must NOT be silently treated as outward data flow."
+    },
+    "ho_amb_02.json": {
+      "expected_chain": "risky",
+      "expected_chain_multi": true,
+      "expected_direct": false,
+      "expected_wildcard": false,
+      "family": "ho_ambiguous_invoke",
+      "rationale": "Mutual invokes: outward edge exists, so the path counts (documented direction rule)."
+    },
+    "ho_amb_03.json": {
+      "expected_chain": "risky",
+      "expected_chain_multi": false,
+      "expected_direct": true,
+      "expected_wildcard": false,
+      "family": "ho_ambiguous_invoke",
+      "rationale": "Self-invoke plus direct send: direct path only (cycles never extend paths)."
+    },
+    "ho_amb_04.json": {
+      "expected_chain": "risky",
+      "expected_chain_multi": true,
+      "expected_direct": false,
+      "expected_wildcard": false,
+      "family": "ho_ambiguous_invoke",
+      "rationale": "Harmless-looking description hides a structural path; structure decides."
+    },
+    "ho_benign_01.json": {
+      "expected_chain": "safe",
+      "expected_chain_multi": false,
+      "expected_direct": false,
+      "expected_wildcard": false,
+      "family": "ho_benign_realistic",
+      "rationale": "Named commands only."
+    },
+    "ho_benign_02.json": {
+      "expected_chain": "safe",
+      "expected_chain_multi": false,
+      "expected_direct": false,
+      "expected_wildcard": false,
+      "family": "ho_benign_realistic",
+      "rationale": "Non-sensitive read, internal send, unlinked tools."
+    },
+    "ho_benign_03.json": {
+      "expected_chain": "safe",
+      "expected_chain_multi": false,
+      "expected_direct": false,
+      "expected_wildcard": false,
+      "family": "ho_benign_realistic",
+      "rationale": "Sensitive read with no send path."
+    },
+    "ho_benign_04.json": {
+      "expected_chain": "safe",
+      "expected_chain_multi": false,
+      "expected_direct": false,
+      "expected_wildcard": false,
+      "family": "ho_benign_realistic",
+      "rationale": "Sensitive read sent internally only."
+    },
+    "ho_benign_05.json": {
+      "expected_chain": "safe",
+      "expected_chain_multi": false,
+      "expected_direct": false,
+      "expected_wildcard": false,
+      "family": "ho_benign_realistic",
+      "rationale": "Missing/empty permissions blocks."
+    },
+    "ho_benign_06.json": {
+      "expected_chain": "safe",
+      "expected_chain_multi": false,
+      "expected_direct": false,
+      "expected_wildcard": false,
+      "family": "ho_benign_realistic",
+      "rationale": "Complete chain shape, non-sensitive + internal."
+    },
+    "ho_benign_07.json": {
+      "expected_chain": "safe",
+      "expected_chain_multi": false,
+      "expected_direct": false,
+      "expected_wildcard": false,
+      "family": "ho_benign_realistic",
+      "rationale": "Empty sources/destinations."
+    },
+    "ho_benign_08.json": {
+      "expected_chain": "safe",
+      "expected_chain_multi": false,
+      "expected_direct": false,
+      "expected_wildcard": false,
+      "family": "ho_benign_realistic",
+      "rationale": "No tools at all."
+    },
+    "ho_chain_01.json": {
+      "expected_chain": "risky",
+      "expected_chain_multi": true,
+      "expected_direct": false,
+      "expected_wildcard": false,
+      "family": "ho_chain_risky",
+      "rationale": "Canonical 2-tool chain."
+    },
+    "ho_chain_02.json": {
+      "expected_chain": "risky",
+      "expected_chain_multi": true,
+      "expected_direct": false,
+      "expected_wildcard": false,
+      "family": "ho_chain_risky",
+      "rationale": "Tools listed sender-first; order must not matter."
+    },
+    "ho_chain_03.json": {
+      "expected_chain": "risky",
+      "expected_chain_multi": true,
+      "expected_direct": false,
+      "expected_wildcard": true,
+      "family": "ho_chain_risky",
+      "rationale": "3-hop chain with wildcard on sender."
+    },
+    "ho_chain_04.json": {
+      "expected_chain": "risky",
+      "expected_chain_multi": true,
+      "expected_direct": false,
+      "expected_wildcard": false,
+      "family": "ho_chain_risky",
+      "rationale": "4-hop chain within depth bound."
+    },
+    "ho_chain_05.json": {
+      "expected_chain": "risky",
+      "expected_chain_multi": true,
+      "expected_direct": false,
+      "expected_wildcard": false,
+      "family": "ho_chain_risky",
+      "rationale": "Diamond fan-in: two readers, one sender."
+    },
+    "ho_chain_06.json": {
+      "expected_chain": "risky",
+      "expected_chain_multi": true,
+      "expected_direct": false,
+      "expected_wildcard": false,
+      "family": "ho_chain_risky",
+      "rationale": "Fan-out: invoked sender is external."
+    },
+    "ho_chain_07.json": {
+      "expected_chain": "risky",
+      "expected_chain_multi": true,
+      "expected_direct": false,
+      "expected_wildcard": false,
+      "family": "ho_chain_risky",
+      "rationale": "Two independent paths; one complete."
+    },
+    "ho_direct_01.json": {
+      "expected_chain": "risky",
+      "expected_chain_multi": false,
+      "expected_direct": true,
+      "expected_wildcard": false,
+      "family": "ho_direct_risky",
+      "rationale": "Canonical single-tool exfiltration."
+    },
+    "ho_direct_02.json": {
+      "expected_chain": "risky",
+      "expected_chain_multi": false,
+      "expected_direct": true,
+      "expected_wildcard": true,
+      "family": "ho_direct_risky",
+      "rationale": "Direct path plus exact wildcard."
+    },
+    "ho_direct_03.json": {
+      "expected_chain": "risky",
+      "expected_chain_multi": false,
+      "expected_direct": true,
+      "expected_wildcard": false,
+      "family": "ho_direct_risky",
+      "rationale": "Direct path buried among benign noise tools."
+    },
+    "ho_direct_04.json": {
+      "expected_chain": "risky",
+      "expected_chain_multi": false,
+      "expected_direct": true,
+      "expected_wildcard": false,
+      "family": "ho_direct_risky",
+      "rationale": "Sends to external AND internal; external branch counts."
+    },
+    "ho_direct_05.json": {
+      "expected_chain": "risky",
+      "expected_chain_multi": false,
+      "expected_direct": true,
+      "expected_wildcard": false,
+      "family": "ho_direct_risky",
+      "rationale": "Second source entry is the sensitive one read."
+    },
+    "ho_direct_06.json": {
+      "expected_chain": "risky",
+      "expected_chain_multi": false,
+      "expected_direct": true,
+      "expected_wildcard": false,
+      "family": "ho_direct_risky",
+      "rationale": "Minimal tool: no commands, no description reliance."
+    },
+    "ho_fn_01.json": {
+      "expected_chain": "risky",
+      "expected_chain_multi": true,
+      "expected_direct": false,
+      "expected_wildcard": false,
+      "family": "ho_adversarial_fn",
+      "rationale": "Deep 4-hop chain near the depth bound."
+    },
+    "ho_fn_02.json": {
+      "expected_chain": "risky",
+      "expected_chain_multi": true,
+      "expected_direct": false,
+      "expected_wildcard": false,
+      "family": "ho_adversarial_fn",
+      "rationale": "Fully reversed listing order."
+    },
+    "ho_fn_03.json": {
+      "expected_chain": "risky",
+      "expected_chain_multi": true,
+      "expected_direct": false,
+      "expected_wildcard": true,
+      "family": "ho_adversarial_fn",
+      "rationale": "True chain beside decoys (incl. unrelated wildcard)."
+    },
+    "ho_fn_04.json": {
+      "expected_chain": "risky",
+      "expected_chain_multi": true,
+      "expected_direct": false,
+      "expected_wildcard": false,
+      "family": "ho_adversarial_fn",
+      "rationale": "Odd tool names still match exactly."
+    },
+    "ho_fn_05.json": {
+      "expected_chain": "risky",
+      "expected_chain_multi": true,
+      "expected_direct": false,
+      "expected_wildcard": false,
+      "family": "ho_adversarial_fn",
+      "rationale": "Pure relay tool carries only invokes."
+    },
+    "ho_fn_06.json": {
+      "expected_chain": "risky",
+      "expected_chain_multi": true,
+      "expected_direct": false,
+      "expected_wildcard": false,
+      "family": "ho_adversarial_fn",
+      "rationale": "Reader also sends internally; external path remains."
+    },
+    "ho_fn_07.json": {
+      "expected_chain": "risky",
+      "expected_chain_multi": false,
+      "expected_direct": true,
+      "expected_wildcard": false,
+      "family": "ho_adversarial_fn",
+      "rationale": "Direct path among distractor declarations."
+    },
+    "ho_fn_08.json": {
+      "expected_chain": "risky",
+      "expected_chain_multi": true,
+      "expected_direct": false,
+      "expected_wildcard": false,
+      "family": "ho_adversarial_fn",
+      "rationale": "One broken and one complete path co-exist."
+    },
+    "ho_fp_01.json": {
+      "expected_chain": "safe",
+      "expected_chain_multi": false,
+      "expected_direct": false,
+      "expected_wildcard": false,
+      "family": "ho_adversarial_fp",
+      "rationale": "Scary description, zero capability fields."
+    },
+    "ho_fp_02.json": {
+      "expected_chain": "safe",
+      "expected_chain_multi": false,
+      "expected_direct": false,
+      "expected_wildcard": false,
+      "family": "ho_adversarial_fp",
+      "rationale": "Near-miss singular ID matches nothing."
+    },
+    "ho_fp_03.json": {
+      "expected_chain": "safe",
+      "expected_chain_multi": false,
+      "expected_direct": false,
+      "expected_wildcard": false,
+      "family": "ho_adversarial_fp",
+      "rationale": "Case differs; exact match required."
+    },
+    "ho_fp_04.json": {
+      "expected_chain": "safe",
+      "expected_chain_multi": false,
+      "expected_direct": false,
+      "expected_wildcard": false,
+      "family": "ho_adversarial_fp",
+      "rationale": "Reversed invoke (sender->reader) carries nothing outward."
+    },
+    "ho_fp_05.json": {
+      "expected_chain": "safe",
+      "expected_chain_multi": false,
+      "expected_direct": false,
+      "expected_wildcard": true,
+      "family": "ho_adversarial_fp",
+      "rationale": "Broad '*' with no external destination; graph must not FP."
+    },
+    "ho_fp_06.json": {
+      "expected_chain": "safe",
+      "expected_chain_multi": false,
+      "expected_direct": false,
+      "expected_wildcard": false,
+      "family": "ho_adversarial_fp",
+      "rationale": "Legacy fields name the pair but create no edges."
+    },
+    "ho_fp_07.json": {
+      "expected_chain": "safe",
+      "expected_chain_multi": false,
+      "expected_direct": false,
+      "expected_wildcard": false,
+      "family": "ho_adversarial_fp",
+      "rationale": "Ominous tool name with no capabilities."
+    },
+    "ho_fp_08.json": {
+      "expected_chain": "safe",
+      "expected_chain_multi": false,
+      "expected_direct": false,
+      "expected_wildcard": false,
+      "family": "ho_adversarial_fp",
+      "rationale": "Self-loop sent internally; external dest unlinked."
+    },
+    "ho_fp_09.json": {
+      "expected_chain": "safe",
+      "expected_chain_multi": false,
+      "expected_direct": false,
+      "expected_wildcard": false,
+      "family": "ho_adversarial_fp",
+      "rationale": "Disconnected components; no invoke edge."
+    },
+    "ho_fp_10.json": {
+      "expected_chain": "safe",
+      "expected_chain_multi": false,
+      "expected_direct": false,
+      "expected_wildcard": false,
+      "family": "ho_adversarial_fp",
+      "rationale": "Typo source reference; missing refs create no edge."
+    },
+    "ho_fp_11.json": {
+      "expected_chain": "safe",
+      "expected_chain_multi": false,
+      "expected_direct": false,
+      "expected_wildcard": false,
+      "family": "ho_adversarial_fp",
+      "rationale": "Hollow relay (empty perms): invoke edge exists but relay sends nowhere."
+    },
+    "ho_mix_01.json": {
+      "expected_chain": "risky",
+      "expected_chain_multi": false,
+      "expected_direct": true,
+      "expected_wildcard": true,
+      "family": "ho_wildcard_mixed",
+      "rationale": "Wildcard AND direct path both true."
+    },
+    "ho_mix_02.json": {
+      "expected_chain": "risky",
+      "expected_chain_multi": true,
+      "expected_direct": false,
+      "expected_wildcard": true,
+      "family": "ho_wildcard_mixed",
+      "rationale": "Wildcard AND multi-step path both true."
+    },
+    "ho_mix_03.json": {
+      "expected_chain": "safe",
+      "expected_chain_multi": false,
+      "expected_direct": false,
+      "expected_wildcard": true,
+      "family": "ho_wildcard_mixed",
+      "rationale": "Wildcard with no structural path."
+    },
+    "ho_mix_04.json": {
+      "expected_chain": "risky",
+      "expected_chain_multi": true,
+      "expected_direct": false,
+      "expected_wildcard": false,
+      "family": "ho_wildcard_mixed",
+      "rationale": "Narrow commands with a true chain."
+    },
+    "ho_partial_01.json": {
+      "expected_chain": "safe",
+      "expected_chain_multi": false,
+      "expected_direct": false,
+      "expected_wildcard": false,
+      "family": "ho_partial",
+      "rationale": "Empty tool list."
+    },
+    "ho_partial_02.json": {
+      "expected_chain": "safe",
+      "expected_chain_multi": false,
+      "expected_direct": false,
+      "expected_wildcard": false,
+      "family": "ho_partial",
+      "rationale": "Tool without permissions."
+    },
+    "ho_partial_03.json": {
+      "expected_chain": "safe",
+      "expected_chain_multi": false,
+      "expected_direct": false,
+      "expected_wildcard": false,
+      "family": "ho_partial",
+      "rationale": "Empty permissions object."
+    },
+    "ho_partial_04.json": {
+      "expected_chain": "safe",
+      "expected_chain_multi": false,
+      "expected_direct": false,
+      "expected_wildcard": false,
+      "family": "ho_partial",
+      "rationale": "Sources/dests declared but unreferenced."
+    }
+  },
+  "robustness_excluded": [
+    "ho_robust_dup_dests.json",
+    "ho_robust_dup_tools.json",
+    "ho_robust_malformed.json",
+    "ho_robust_missing_version.json",
+    "ho_robust_top_array.json",
+    "ho_robust_undefined_refs.json",
+    "ho_robust_unknown_field.json",
+    "ho_robust_wrong_type.json"
+  ]
+}

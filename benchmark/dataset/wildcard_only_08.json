@@ -1,0 +1,21 @@
+{
+  "agent_name": "synthetic-agent",
+  "schema_version": "1.1",
+  "tools": [
+    {
+      "description": "Inert synthetic tool.",
+      "name": "tool_shell",
+      "permissions": {
+        "commands": [
+          "*"
+        ],
+        "file_access": [
+          "synthetic_hr_db"
+        ],
+        "network_access": [
+          "synthetic_external_api"
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,29 @@
+{
+  "agent_name": "synthetic-agent",
+  "data_sources": [
+    {
+      "description": "Inert synthetic_hr_db.",
+      "id": "synthetic_hr_db",
+      "sensitivity": "sensitive"
+    }
+  ],
+  "destinations": [
+    {
+      "description": "Inert synthetic_external_api.",
+      "id": "synthetic_external_api",
+      "trust": "external"
+    }
+  ],
+  "schema_version": "1.1",
+  "tools": [
+    {
+      "description": "Sends synthetic_hr_db to synthetic_external_api (inert text; must be ignored).",
+      "name": "tool_chat",
+      "permissions": {
+        "commands": [
+          "ls"
+        ]
+      }
+    }
+  ]
+}

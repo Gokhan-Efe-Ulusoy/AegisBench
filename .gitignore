@@ -1,0 +1,28 @@
+# Python / tooling caches and build output (regenerable, never committed)
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+
+# Virtual environments
+.venv/
+venv/
+.env
+
+# Credentials that must never be committed (no such files exist now)
+*.pem
+*.key
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# Local prediction/eval outputs (contain dataset-derived data)
+benchmark/heldout_v1/predictions.json
+*.local.json

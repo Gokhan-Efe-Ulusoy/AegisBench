@@ -1,0 +1,48 @@
+{
+  "agent_name": "heldout-agent",
+  "data_sources": [
+    {
+      "id": "heldout_patient_records",
+      "sensitivity": "sensitive"
+    }
+  ],
+  "destinations": [
+    {
+      "id": "heldout_public_feed",
+      "trust": "external"
+    }
+  ],
+  "schema_version": "1.1",
+  "tools": [
+    {
+      "description": "Inert heldout tool.",
+      "name": "r",
+      "permissions": {
+        "invokes": [
+          "pure"
+        ],
+        "reads": [
+          "heldout_patient_records"
+        ]
+      }
+    },
+    {
+      "description": "Inert heldout tool.",
+      "name": "pure",
+      "permissions": {
+        "invokes": [
+          "s"
+        ]
+      }
+    },
+    {
+      "description": "Inert heldout tool.",
+      "name": "s",
+      "permissions": {
+        "sends_to": [
+          "heldout_public_feed"
+        ]
+      }
+    }
+  ]
+}

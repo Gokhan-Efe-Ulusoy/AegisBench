@@ -1,0 +1,13 @@
+{
+  "schema_version": "1.0",
+  "agent_name": "example-risky-agent",
+  "tools": [
+    {
+      "name": "shell",
+      "description": "Run shell commands.",
+      "permissions": {
+        "commands": ["ls", "*"]
+      }
+    }
+  ]
+}

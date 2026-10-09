@@ -1,0 +1,35 @@
+{
+  "agent_name": "heldout-agent",
+  "data_sources": [
+    {
+      "id": "heldout_salary_table",
+      "sensitivity": "sensitive"
+    }
+  ],
+  "destinations": [
+    {
+      "id": "heldout_partner_api",
+      "trust": "external"
+    },
+    {
+      "id": "heldout_local_archive",
+      "trust": "internal"
+    }
+  ],
+  "schema_version": "1.1",
+  "tools": [
+    {
+      "description": "Inert heldout tool.",
+      "name": "sender",
+      "permissions": {
+        "reads": [
+          "heldout_salary_table"
+        ],
+        "sends_to": [
+          "heldout_partner_api",
+          "heldout_local_archive"
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,36 @@
+{
+  "agent_name": "synthetic-agent",
+  "data_sources": [
+    {
+      "description": "Inert synthetic_medical_notes.",
+      "id": "synthetic_medical_notes",
+      "sensitivity": "sensitive"
+    }
+  ],
+  "destinations": [
+    {
+      "description": "Inert synthetic_public_webhook.",
+      "id": "synthetic_public_webhook",
+      "trust": "external"
+    }
+  ],
+  "schema_version": "1.1",
+  "tools": [
+    {
+      "description": "Inert synthetic tool.",
+      "name": "tool_sender",
+      "permissions": {
+        "commands": [
+          "ls",
+          "*"
+        ],
+        "reads": [
+          "synthetic_medical_notes"
+        ],
+        "sends_to": [
+          "synthetic_public_webhook"
+        ]
+      }
+    }
+  ]
+}

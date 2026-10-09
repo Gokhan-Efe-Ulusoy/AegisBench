@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "code-search": {
+      "command": "npx",
+      "args": ["-y", "synthetic-search-server", "/tmp/synthetic-repo"],
+      "env": {
+        "SEARCH_API_KEY": "REDACTED_EXAMPLE_NOT_A_REAL_KEY"
+      }
+    }
+  }
+}

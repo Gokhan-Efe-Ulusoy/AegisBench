@@ -1,0 +1,9 @@
+{
+  "servers": {
+    "browser": {
+      "type": "stdio",
+      "command": "npx",
+      "args": ["-y", "synthetic-browser-server"]
+    }
+  }
+}

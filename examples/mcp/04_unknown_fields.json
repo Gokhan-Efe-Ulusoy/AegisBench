@@ -1,0 +1,11 @@
+{
+  "mcpServers": {
+    "notes": {
+      "command": "python",
+      "args": ["-m", "synthetic_notes_server"],
+      "priority": "high",
+      "retry": 3
+    }
+  },
+  "extraTopLevel": true
+}

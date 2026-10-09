@@ -1,0 +1,51 @@
+{
+  "agent_name": "heldout-agent",
+  "data_sources": [
+    {
+      "id": "heldout_salary_table",
+      "sensitivity": "sensitive"
+    }
+  ],
+  "destinations": [
+    {
+      "id": "heldout_public_feed",
+      "trust": "external"
+    }
+  ],
+  "schema_version": "1.1",
+  "tools": [
+    {
+      "description": "Inert heldout tool.",
+      "name": "reader",
+      "permissions": {
+        "invokes": [
+          "relay"
+        ],
+        "reads": [
+          "heldout_salary_table"
+        ]
+      }
+    },
+    {
+      "description": "Inert heldout tool.",
+      "name": "relay",
+      "permissions": {
+        "invokes": [
+          "sender"
+        ]
+      }
+    },
+    {
+      "description": "Inert heldout tool.",
+      "name": "sender",
+      "permissions": {
+        "commands": [
+          "*"
+        ],
+        "sends_to": [
+          "heldout_public_feed"
+        ]
+      }
+    }
+  ]
+}

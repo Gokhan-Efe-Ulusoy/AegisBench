@@ -1,0 +1,34 @@
+{
+  "agent_name": "synthetic-agent",
+  "data_sources": [
+    {
+      "description": "Inert synthetic_hr_db.",
+      "id": "synthetic_hr_db",
+      "sensitivity": "sensitive"
+    }
+  ],
+  "schema_version": "1.1",
+  "tools": [
+    {
+      "description": "Inert synthetic tool.",
+      "name": "tool_reader",
+      "permissions": {
+        "invokes": [
+          "tool_helper"
+        ],
+        "reads": [
+          "synthetic_hr_db"
+        ]
+      }
+    },
+    {
+      "description": "Inert synthetic tool.",
+      "name": "tool_helper",
+      "permissions": {
+        "commands": [
+          "ls"
+        ]
+      }
+    }
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "servers": {
+    "events": {
+      "type": "sse",
+      "url": "https://example.invalid/events",
+      "headers": {
+        "Authorization": "REDACTED_EXAMPLE_NOT_A_REAL_TOKEN"
+      }
+    }
+  }
+}

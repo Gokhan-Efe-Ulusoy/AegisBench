@@ -1,0 +1,39 @@
+{
+  "agent_name": "heldout-agent",
+  "data_sources": [
+    {
+      "id": "heldout_sample_logs",
+      "sensitivity": "non-sensitive"
+    }
+  ],
+  "destinations": [
+    {
+      "id": "heldout_team_chat",
+      "trust": "internal"
+    }
+  ],
+  "schema_version": "1.1",
+  "tools": [
+    {
+      "description": "Inert heldout tool.",
+      "name": "viewer",
+      "permissions": {
+        "invokes": [
+          "printer"
+        ],
+        "reads": [
+          "heldout_sample_logs"
+        ]
+      }
+    },
+    {
+      "description": "Inert heldout tool.",
+      "name": "printer",
+      "permissions": {
+        "sends_to": [
+          "heldout_team_chat"
+        ]
+      }
+    }
+  ]
+}

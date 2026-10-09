@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "notes": {
+      "command": "python",
+      "args": ["-m", "synthetic_notes_server"]
+    }
+  }
+}

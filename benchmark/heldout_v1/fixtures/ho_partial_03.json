@@ -1,0 +1,11 @@
+{
+  "agent_name": "heldout-agent",
+  "schema_version": "1.1",
+  "tools": [
+    {
+      "description": "Inert heldout tool.",
+      "name": "t",
+      "permissions": {}
+    }
+  ]
+}
